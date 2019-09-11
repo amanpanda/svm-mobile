@@ -2,16 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-// import firebase from 'utilities/firebase';
 import { store, persistor } from 'ducks/root';
+import App from 'utilities/navigation';
 
-import LogIn from 'screens/LogIn';
+console.disableYellowBox = true;
 
 export default () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <LogIn />
+        <App />
       </PersistGate>
     </Provider>
   )

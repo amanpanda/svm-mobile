@@ -9,6 +9,7 @@ import {
   withState,
 } from 'recompose';
 import { withAlerts, withLoading } from 'hocs';
+import { setAuthState } from 'ducks/user/UserActions';
 import { auth } from 'utilities/firebase';
 
 import LogInPresenter from './LogInPresenter';
@@ -17,6 +18,7 @@ export default compose(
   setDisplayName('LogInContainer'),
   withAlerts,
   withLoading,
+  connect(),
   withStateHandlers(() => ({
     username: 'aman@smartvillagemovement.org',
     password: 'helloo',
@@ -40,11 +42,13 @@ export default compose(
       username,
       password,
       setDisableSubmit,
+      dispatch,
     }) => async () => {
       try {
         setDisableSubmit(true);
         const res = await auth.signInWithEmailAndPassword(username, password);
-        setSuccess("Success.")
+        setSuccess("Welcome.");
+        dispatch(setAuthState(true));
       } catch (error) {
         setError("Could not log in. Your username and password combination was incorrect.")
       } finally {

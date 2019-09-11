@@ -9,34 +9,37 @@ import { AsyncStorage } from 'react-native'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import submit from './submit/SubmitReducer';
 import survey from './survey/SurveyReducer';
+import user from './user/UserReducer';
 
 const rootPersistConfig = {
   key: 'root',
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
-  whitelist: ['submit', 'survey'],
+  whitelist: ['submit', 'survey', 'user'],
 };
 
-// const submitPersistConfig = {
-//   key: 'submit',
-//   storage,
-// };
+const userPersistConfig = {
+  storage: AsyncStorage,
+  key: 'user',
+};
 
-// const surveyPersistConfig = {
-//   key: 'survey',
-//   storage,
-// };
+const surveyPersistConfig = {
+  storage: AsyncStorage,
+  key: 'survey',
+};
 
-
-// const rootReducer = combineReducers({
-//   submit: persistReducer(submitPersistConfig, submit),
-//   survey: persistReducer(surveyPersistConfig, survey),
-// });
+const submitPersistConfig = {
+  storage: AsyncStorage,
+  key: 'submit',
+};
 
 const rootReducer = combineReducers({
-  submit,
-  survey,
+  submit: persistReducer(submitPersistConfig, submit),
+  survey: persistReducer(surveyPersistConfig, survey),
+  user: persistReducer(userPersistConfig, user),
 })
+
+
 
 let composeEnhancers = compose;
 if (__DEV__) {
@@ -49,10 +52,9 @@ export const store = createStore(
   persistedReducer, {}, composeEnhancers(
     applyMiddleware(
       thunk, 
-      logger,
+      // logger,
     ),
   ),
 );
 
 export const persistor = persistStore(store);
-

@@ -8,6 +8,8 @@ const SubmitPresenter = (props) => {
     logOut,
     numStaged,
     username,
+    disableSubmit,
+    submitAllSurveys
   } = props;
   return (
     <View style={styles.container}>
@@ -18,20 +20,20 @@ const SubmitPresenter = (props) => {
           <Text 
             style={styles.numStaged}
           >
-            {`${numStaged} survey${numStaged > 1 ? 's' : ''} ready to submit.`}
+            {`${numStaged} survey${numStaged === 1 ? '' : 's'} ready to submit.`}
           </Text>
         </View>
         <View
           style={styles.submitButtonContainer}
         >
-          <Button
+          {numStaged > 0 && (<Button
             title="Submit"
             buttonStyle={{
               backgroundColor: 'green',
             }}
-            disabled={false}
-            onPress={() => console.log('hi')}
-          />
+            disabled={disableSubmit}
+            onPress={() => submitAllSurveys()}
+          />)}
         </View>
       </Card>
       <View style={styles.logOutButtonContainer}>

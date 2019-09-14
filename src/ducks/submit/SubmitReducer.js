@@ -1,4 +1,4 @@
-import { STAGE_NEW_SUBMISSION } from './SubmitTypes';
+import { STAGE_NEW_SUBMISSION, CLEAR_BACKLOG } from './SubmitTypes';
 
 const initialState = {
   backlog: [],
@@ -13,6 +13,7 @@ const submitReducer = (state=initialState, action) => {
           action.submission,
         ],
       };
+    case CLEAR_BACKLOG:
     case 'LOG_OUT':
       return {
         backlog: [],

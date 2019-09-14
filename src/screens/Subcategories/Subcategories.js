@@ -53,7 +53,7 @@ export default compose(
       const { meta, assets } = survey;
       let surveyData = _.find(assets, asset => {
         const { documentId } = asset;
-        return documentId.toString() === `${category} ${subcategory}` && _.has(asset, questions);
+        return documentId.toString() === `${category} ${subcategory}` && _.has(asset, 'questions');
       })
       if (!surveyData) {
         surveyData = _.find(assets, asset => asset.isDefault === true);

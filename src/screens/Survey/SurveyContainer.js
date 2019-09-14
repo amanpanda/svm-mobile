@@ -112,12 +112,19 @@ export default compose(
         documentId,
       } = surveyData;
       const completionDate = moment(completionTimestamp).local().format('MMM DD YYYY LT');
+      const stringifiedMcqAnswers = _.map(answers, answer => {
+        if (Array.isArray(answer)) {
+          return answer.join('|');
+        } else {
+          return answer;
+        }
+      });
       const submission = {
         userId,
         username,
         completionTimestamp,
         completionDate,
-        answers,
+        answers: stringifiedMcqAnswers,
         imageUri,
         meta: {
           surveyType,
@@ -128,38 +135,6 @@ export default compose(
       dispatch(stageNewSubmission(submission));
       setInfo("Survey data cached on device");
       navDispatch(StackActions.popToTop());
-      // const { status } = await Permissions.askAsync(Permissions.LOCATION);
-      // if (status !== 'granted') {
-      //   setError("Can not complete survey without location permissions.")
-      //   return;
-      // }
-      // try {
-      //   const location = await Location.getCurrentPositionAsync({});
-      //   const { 
-      //     coords,
-      //   } = location;
-      //   const { 
-      //     city,
-      //     country,
-      //     isoCountryCode,
-      //     postalCode,
-      //     region,
-      //     street,
-      //   } = (await Location.reverseGeocodeAsync({ ...coords }))[0];
-      //   setLocation(city)
-      //   const locationObject = {
-      //     ...coords,
-      //     city,
-      //     country,
-      //     isoCountryCode,
-      //     postalCode,
-      //     region,
-      //     street,
-      //   };
-      // } catch (err) {
-      //   // setLocation(err);
-      //   console.log('err: ', err);
-      // }
     },
   }),
 )(SurveyPresenter);

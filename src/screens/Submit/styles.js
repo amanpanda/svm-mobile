@@ -17,6 +17,7 @@ export default StyleSheet.create({
   },
   numStaged: {
     fontSize: 35,
+    textAlign: 'center',
   },
   username: {
     fontSize: 18,

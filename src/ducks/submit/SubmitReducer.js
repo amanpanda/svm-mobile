@@ -1,9 +1,4 @@
-// import {
-//   DEPOSIT_CHAT_DATA,
-//   CLEAR_CHAT_CACHE,
-// } from './ChatTypes';
-
-// import { LOGOUT_SUCCESS } from 'ducks/user/UserTypes';
+import { STAGE_NEW_SUBMISSION } from './SubmitTypes';
 
 const initialState = {
   backlog: [],
@@ -11,6 +6,17 @@ const initialState = {
 
 const submitReducer = (state=initialState, action) => {
   switch (action.type) {
+    case STAGE_NEW_SUBMISSION:
+      return {
+        backlog: [
+          ...state.backlog,
+          action.submission,
+        ],
+      };
+    case 'LOG_OUT':
+      return {
+        backlog: [],
+      }
     default:
       return {
         ...state,

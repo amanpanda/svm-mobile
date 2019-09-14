@@ -14,8 +14,8 @@ import user from './user/UserReducer';
 const rootPersistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  stateReconciler: autoMergeLevel2,
-  whitelist: ['submit', 'survey', 'user'],
+  // stateReconciler: autoMergeLevel2,
+  // whitelist: ['submit', 'survey', 'user'],
 };
 
 const userPersistConfig = {
@@ -37,6 +37,9 @@ const rootReducer = combineReducers({
   submit: persistReducer(submitPersistConfig, submit),
   survey: persistReducer(surveyPersistConfig, survey),
   user: persistReducer(userPersistConfig, user),
+  // submit,
+  // survey,
+  // user,
 })
 
 

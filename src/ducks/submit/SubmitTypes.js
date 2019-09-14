@@ -1,0 +1,3 @@
+
+export const STAGE_NEW_SUBMISSION = 'STAGE_NEW_SUBMISSION';
+export const LOG_OUT = 'LOG_OUT';

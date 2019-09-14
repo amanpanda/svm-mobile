@@ -8,7 +8,6 @@ const withAlerts = WrappedComponent => (props) => {
   return (
     <View style={{ flex: 1 }}>
       <WrappedComponent {...props} />
-      <FlashMessage position="top" /> 
     </View>
   );
 }
@@ -16,9 +15,9 @@ const withAlerts = WrappedComponent => (props) => {
 const enhance = WrappedComponent => compose(
   withAlerts,
   withHandlers({
-    setError: () => message => showMessage({ message, type: "error" }),
-    setInfo: () => message => showMessage({ message, type: "info" }),
-    setSuccess: () => message => showMessage({ message, type: "success" }),
+    setError: () => description => showMessage({ message: "Error", type: "danger", description, }),
+    setInfo: () => description => showMessage({ message: "Note:", type: "info", description }),
+    setSuccess: () => description => showMessage({ message: "Success", type: "success", description }),
   }),
 )(WrappedComponent);
 

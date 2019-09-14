@@ -17,7 +17,6 @@ import LogInPresenter from './LogInPresenter';
 export default compose(
   setDisplayName('LogInContainer'),
   withAlerts,
-  withLoading,
   connect(),
   withStateHandlers(() => ({
     username: 'aman@smartvillagemovement.org',
@@ -43,12 +42,14 @@ export default compose(
       password,
       setDisableSubmit,
       dispatch,
+      navigation,
     }) => async () => {
+      const { navigate } = navigation;
       try {
         setDisableSubmit(true);
         const res = await auth.signInWithEmailAndPassword(username, password);
-        setSuccess("Welcome.");
         dispatch(setAuthState(true));
+        navigate('Tabs');
       } catch (error) {
         setError("Could not log in. Your username and password combination was incorrect.")
       } finally {

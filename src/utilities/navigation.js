@@ -4,16 +4,89 @@ import {
   createAppContainer,
   createSwitchNavigator,
 } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import {
-  Assets,
-  Dashboard,
-  Submit,
+  Assets as AssetsScreen,
+  Dashboard as DashboardScreen, 
+  Submit as SubmitScreen,
   LogIn,
   Loading,
+  Subcategories,
+  Survey,
 } from 'screens';
 
 import { store } from 'ducks/root';
+
+const headerStyle = {
+  backgroundColor: '#025697',
+}
+const headerTitleStyle = {
+  color: 'white',
+}
+
+const Dashboard = createStackNavigator({
+  Dashboard: {
+    screen: DashboardScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Dashboard',
+      headerStyle,
+      headerTitleStyle,
+      headerTintColor: 'white'
+    }),
+  },
+  Survey: {
+    screen: Survey,
+    navigationOptions: ({ navigation }) => ({
+      title: 'General Survey',
+      headerStyle,
+      headerTitleStyle,
+      headerTintColor: 'white'
+    }),
+  },
+});
+
+const Assets = createStackNavigator({
+  Assets: {
+    screen: AssetsScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Assets',
+      headerStyle,
+      headerTitleStyle,
+      headerTintColor: 'white',
+    }),
+  },
+  Subcategories: {
+    screen: Subcategories,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Subcategories',
+      headerStyle,
+      headerTitleStyle,
+      headerTintColor: 'white',
+    }),
+  },
+  Survey: {
+    screen: Survey,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Asset Survey',
+      headerStyle,
+      headerTitleStyle,
+      headerTintColor: 'white'
+    }),
+  },
+});
+
+
+const Submit = createStackNavigator({
+  Submit: {
+    screen: SubmitScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Submit',
+      headerStyle,
+      headerTitleStyle,
+    }),
+  },
+});
 
 const Tabs = createBottomTabNavigator(
   {
@@ -47,8 +120,8 @@ const Tabs = createBottomTabNavigator(
 export default createAppContainer(
   createSwitchNavigator(
     {
-      Loading: Loading,
-      LogIn: LogIn,
+      Loading,
+      LogIn,
       Tabs,
     },
     {

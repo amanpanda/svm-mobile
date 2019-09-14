@@ -33,9 +33,10 @@ export default compose(
             isAuthenticated,
           },
         } = store.getState();
-        if (isAuthenticated) navigate('Tabs');
-        else navigate('LogIn');
-      }, 2000)
+        navigate('Tabs');
+        // if (isAuthenticated) navigate('Tabs');
+        // else navigate('LogIn');
+      }, 1)
     },
   }),
 )(Loading);
